@@ -40,12 +40,20 @@ class Area {
     return 0.5 * sum.abs();
   }
 
-  static double shoelaceFromPoints(List<Point> points){
+  static double shoelaceFromPoints<T extends num>(List<Point<T>> points){
     double sum = 0;
     for(int i = 0; i < points.length - 1; i++){
-      sum += points[i].x * points[i + 1].y - points[i + 1].x * points[i].y;
+      final x1 = points[i].x.toDouble();
+      final y1 = points[i].y.toDouble();
+      final x2 = points[i + 1].x.toDouble();
+      final y2 = points[i + 1].y.toDouble();
+      sum += x1 * y2 - x2 * y1;
     }
-    sum += points[points.length - 1].x * points[0].y - points[0].x * points[points.length - 1].y;
+    final lastX = points[points.length - 1].x.toDouble();
+    final lastY = points[points.length - 1].y.toDouble();
+    final firstX = points[0].x.toDouble();
+    final firstY = points[0].y.toDouble();
+    sum += lastX * firstY - firstX * lastY;
     return 0.5 * sum.abs();
   }
 
