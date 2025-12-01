@@ -11,4 +11,5 @@ export 'src/math/area.dart';
 export 'src/math/pgcd.dart';
 export 'src/math/vec2.dart';
 export 'src/math/matrix.dart';
+export 'src/math/math_utils.dart';
 export 'src/graph.dart';
