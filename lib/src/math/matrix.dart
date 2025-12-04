@@ -35,13 +35,23 @@ class Matrix2<T> {
   }
 
   T operator []((int, int) vector){
-    if(vector.$1 < 0 || vector.$1 >= rows){
-      throw RangeError("x must be between 0 and $rows");
+    if(vector.$1 < 0 || vector.$1 >= cols){
+      throw RangeError("x must be between 0 and $cols");
     }
-    if(vector.$2 < 0 || vector.$2 >= cols){
-      throw RangeError("y must be between 0 and $cols");
+    if(vector.$2 < 0 || vector.$2 >= rows){
+      throw RangeError("y must be between 0 and $rows");
     }
-    return _data[vector.$1][vector.$2];
+    return _data[vector.$2][vector.$1];
+  }
+
+  void operator []=( (int, int) vector, T value){
+    if(vector.$1 < 0 || vector.$1 >= cols){
+      throw RangeError("x must be between 0 and $cols");
+    }
+    if(vector.$2 < 0 || vector.$2 >= rows){
+      throw RangeError("y must be between 0 and $rows");
+    }
+    _data[vector.$2][vector.$1] = value;
   }
 
   T at(int x, int y){
@@ -56,8 +66,8 @@ class Matrix2<T> {
   }
 
   void iterate(void Function(T value, (int, int) vector) callback){
-    for(var y = 0; y < rows; y++){
-      for(var x = 0; x < cols; x++){
+    for(var x = 0; x < rows; x++){
+      for(var y = 0; y < cols; y++){
         callback(this[(x, y)], (x, y));
       }
     }
@@ -77,9 +87,9 @@ class Matrix2<T> {
 
   /// Iterates over the 8 surrounding cells of the given vector
   void iterateAround8((int, int) vector, void Function(T value, (int, int) vector) callback){
-    for(var y = vector.$2 - 1; y <= vector.$2 + 1; y++){
-      for(var x = vector.$1 - 1; x <= vector.$1 + 1; x++){
-        if(!isInside(vector) || (vector == (x, y))){
+    for(var x = vector.$1 - 1; x <= vector.$1 + 1; x++){
+      for(var y = vector.$2 - 1; y <= vector.$2 + 1; y++){
+        if(!isInside((x, y)) || (vector == (x, y))){
           continue;
         }
         callback(this[(x, y)], (x, y));
@@ -135,14 +145,14 @@ class Matrix2<T> {
     }
 
   bool isOnEdge((int, int) vector){
-    return vector.$1 == 0 || vector.$1 == rows - 1 || vector.$2 == 0 || vector.$2 == cols - 1;
+    return vector.$1 == 0 || vector.$1 == cols - 1 || vector.$2 == 0 || vector.$2 == rows - 1;
   }
 
   bool isInside((int, int) vector){
-    return vector.$1 > 0 && vector.$1 < rows - 1 && vector.$2 > 0 && vector.$2 < cols - 1;
+    return vector.$1 >= 0 && vector.$1 < rows && vector.$2 >= 0 && vector.$2 < cols;
   }
 
   bool isOnCorner((int, int) vector){
-    return (vector.$1 == 0 || vector.$1 == rows - 1) && (vector.$2 == 0 || vector.$2 == cols - 1);
+    return (vector.$1 == 0 || vector.$1 == cols - 1) && (vector.$2 == 0 || vector.$2 == rows - 1);
   }
 }
