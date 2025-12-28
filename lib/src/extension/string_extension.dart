@@ -100,3 +100,15 @@ extension Find on String {
   }
 
 }
+
+extension Utils on String {
+  String reverse() {
+    return split('').reversed.join();
+  }
+
+  bool isPalindrome() {
+    String firstHalf = substring(0, length ~/ 2);
+    String secondHalf = substring((length + 1) ~/ 2).reverse();
+    return firstHalf == secondHalf;
+  }
+}

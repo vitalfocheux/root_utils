@@ -35,13 +35,13 @@ class Matrix2<T> {
   }
 
   T operator []((int, int) vector){
-    if(vector.$1 < 0 || vector.$1 >= cols){
-      throw RangeError("x must be between 0 and $cols");
+    if(vector.$1 < 0 || vector.$1 >= rows){
+      throw RangeError("x must be between 0 and $rows");
     }
-    if(vector.$2 < 0 || vector.$2 >= rows){
-      throw RangeError("y must be between 0 and $rows");
+    if(vector.$2 < 0 || vector.$2 >= cols){
+      throw RangeError("y must be between 0 and $cols");
     }
-    return _data[vector.$2][vector.$1];
+    return _data[vector.$1][vector.$2];
   }
 
   void operator []=( (int, int) vector, T value){

@@ -223,4 +223,18 @@ void main(){
     });
   });
 
+  group('isPalindrome', () {
+    test('palindrome even length', () {
+      expect('abccba'.isPalindrome(), isTrue);
+    });
+
+    test('palindrome odd length', () {
+      expect('abcba'.isPalindrome(), isTrue);
+    });
+
+    test('not a palindrome', () {
+      expect('abcd'.isPalindrome(), isFalse);
+    });
+  });
+
 }

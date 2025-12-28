@@ -37,7 +37,7 @@ BigInt factorialBig(int n) {
 }
 
 /// integer power (fast)
-int powInt(int base, int exp) {
+int pow(int base, int exp) {
   if (exp < 0) throw ArgumentError('exp must be >= 0');
   var result = 1;
   var b = base;
@@ -131,28 +131,6 @@ Iterable<List<T>> combinations<T>(List<T> items, int k) sync* {
   }
 }
 
-/// permutations generator (Heap's algorithm)
-Iterable<List<T>> permutations<T>(List<T> items) sync* {
-  final n = items.length;
-  final a = List<T>.from(items);
-  final c = List<int>.filled(n, 0);
-  yield List<T>.from(a);
-  var i = 0;
-  while (i < n) {
-    if (c[i] < i) {
-      final k = (i % 2 == 0) ? 0 : c[i];
-      final tmp = a[k];
-      a[k] = a[i];
-      a[i] = tmp;
-      yield List<T>.from(a);
-      c[i]++;
-      i = 0;
-    } else {
-      c[i] = 0;
-      i++;
-    }
-  }
-}
 
 /// sliding window / pairwise
 extension IterableWindow<T> on Iterable<T> {
