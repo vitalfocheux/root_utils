@@ -1,7 +1,7 @@
 import 'dart:math';
-import 'package:root_utils/root_utils.dart';
+import 'string_extension.dart';
 
-extension Utils on num {
+extension NumericUtils on num {
 
   bool isPalindrome(){
     return toString().isPalindrome();
