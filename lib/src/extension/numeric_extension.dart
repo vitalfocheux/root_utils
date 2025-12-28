@@ -47,4 +47,18 @@ extension NumericUtils on num {
       return this > min && this < max;
     }
   }
+
+  List<int> primeFactor(){
+    List<int> res = [];
+    int i = 2;
+    int n = toInt();
+    while(n > 1){
+      while(n % i == 0){
+        res.add(i);
+        n = n ~/ i;
+      }
+      i++;
+    }
+    return res;
+  }
 }
