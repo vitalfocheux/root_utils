@@ -61,4 +61,17 @@ extension NumericUtils on num {
     }
     return res;
   }
+
+  List<int> getDivisors(){
+    List<int> divisors = [];
+    for(int i = 1; i * i <= this; i++){
+      if(this % i == 0){
+        divisors.add(i);
+        if(i != this ~/ i){
+          divisors.add(this ~/ i);
+        }
+      }
+    }
+    return divisors..sort();
+  }
 }
