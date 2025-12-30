@@ -155,4 +155,28 @@ class Matrix2<T> {
   bool isOnCorner((int, int) vector){
     return (vector.$1 == 0 || vector.$1 == cols - 1) && (vector.$2 == 0 || vector.$2 == rows - 1);
   }
+
+  /// Produit matriciel : this (rows × cols) * other (cols × n) = result (rows × n)
+  Matrix2<num> operator *(Matrix2<num> other) {
+    if (cols != other.rows) {
+      throw ArgumentError(
+        'Cannot multiply: columns of first matrix ($cols) '
+        'must equal rows of second matrix (${other.rows})'
+      );
+    }
+
+    Matrix2<num> result = Matrix2<num>(rows, other.cols);
+
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < other.cols; j++) {
+        num sum = 0;
+        for (int k = 0; k < cols; k++) {
+          sum += (this[(i, k)] as num) * other[(k, j)];
+        }
+        result[(i, j)] = sum;
+      }
+    }
+
+    return result;
+  }
 }
